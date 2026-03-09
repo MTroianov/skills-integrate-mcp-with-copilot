@@ -2,30 +2,110 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+:root {
+  --school-lime: #98d900;
+  --school-lime-dark: #5c8700;
+  --school-lime-soft: #eefacb;
+  --ink: #1f2e0f;
+  --card-border: #d8ebad;
+  --white: #ffffff;
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--ink);
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ffffff 0%, #f4ffd9 100%);
+  position: relative;
+}
+
+.branch-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(152, 217, 0, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(152, 217, 0, 0.2), transparent 40%);
+}
+
+.branch-background::before,
+.branch-background::after {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  background-repeat: repeat;
+  opacity: 0.45;
+}
+
+.branch-background::before {
+  background-image: repeating-linear-gradient(
+    105deg,
+    transparent 0 70px,
+    rgba(92, 135, 0, 0.28) 70px 73px,
+    transparent 73px 120px
+  );
+  animation: drift-branches-a 24s linear infinite;
+}
+
+.branch-background::after {
+  background-image: repeating-linear-gradient(
+    70deg,
+    transparent 0 95px,
+    rgba(152, 217, 0, 0.35) 95px 98px,
+    transparent 98px 155px
+  );
+  animation: drift-branches-b 32s linear infinite reverse;
+}
+
+.site-shell {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  position: relative;
+  z-index: 1;
 }
 
 header {
   text-align: center;
   padding: 20px 0;
   margin-bottom: 30px;
-  background-color: #1a237e;
-  color: white;
-  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--ink);
+  border-radius: 14px;
+  border: 2px solid var(--school-lime);
+  box-shadow: 0 8px 24px rgba(92, 135, 0, 0.12);
 }
 
 header h1 {
   margin-bottom: 10px;
+}
+
+header h2 {
+  color: var(--school-lime-dark);
+}
+
+.mascot-row {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mascot-row img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  border-radius: 12px;
+  background-color: #f9ffec;
+  border: 1px solid var(--card-border);
+  padding: 6px;
 }
 
 main {
@@ -42,10 +122,11 @@ main {
 }
 
 section {
-  background-color: white;
+  background-color: var(--white);
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(92, 135, 0, 0.12);
+  border: 1px solid var(--card-border);
   width: 100%;
   max-width: 500px;
 }
@@ -53,21 +134,21 @@ section {
 section h3 {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  color: #1a237e;
+  border-bottom: 1px solid #d6e9aa;
+  color: var(--school-lime-dark);
 }
 
 .activity-card {
   margin-bottom: 15px;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--card-border);
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: var(--school-lime-soft);
 }
 
 .activity-card h4 {
   margin-bottom: 10px;
-  color: #0066cc;
+  color: #325500;
 }
 
 .activity-card p {
@@ -78,12 +159,12 @@ section h3 {
 .participants-container {
   margin-top: 15px;
   padding-top: 12px;
-  border-top: 1px dashed #ccc;
+  border-top: 1px dashed #bddb7f;
 }
 
 .participants-section h5 {
   margin-bottom: 8px;
-  color: #1a237e;
+  color: var(--school-lime-dark);
   font-size: 16px;
 }
 
@@ -113,7 +194,7 @@ section h3 {
 .delete-btn {
   background: none;
   border: none;
-  color: #c62828;
+  color: #aa1c1c;
   cursor: pointer;
   font-size: 14px;
   padding: 2px 5px;
@@ -144,14 +225,20 @@ section h3 {
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #c4df8c;
   border-radius: 4px;
   font-size: 16px;
 }
 
+.form-group input:focus,
+.form-group select:focus {
+  outline: 2px solid rgba(152, 217, 0, 0.5);
+  border-color: var(--school-lime);
+}
+
 button {
-  background-color: #1a237e;
-  color: white;
+  background-color: var(--school-lime);
+  color: #17320f;
   border: none;
   padding: 10px 15px;
   font-size: 16px;
@@ -161,7 +248,7 @@ button {
 }
 
 button:hover {
-  background-color: #3949ab;
+  background-color: #abef00;
 }
 
 .message {
@@ -196,5 +283,26 @@ footer {
   text-align: center;
   margin-top: 30px;
   padding: 20px;
-  color: #666;
+  color: #3e5f09;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+}
+
+@keyframes drift-branches-a {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(-80px) translateY(-45px);
+  }
+}
+
+@keyframes drift-branches-b {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(90px) translateY(60px);
+  }
 }
